@@ -40,3 +40,42 @@
 | - Progress bar |
 
 ---
+
+---
+
+## | Navbar (same) |
+
+## | Hero: “Empower Your Learners with Space4All” |
+
+| Section: Crash Courses |
+| [Course Cards: Coding Basics | Teaching Space Science | Climate Literacy] |
+| - Each card: “Start Course” / “Continue” |
+
+---
+
+| Section: Teaching Resources (Downloads) |
+| - Lesson Plans (PDFs)
+| - Interactive Slides
+| - Activity Sheets
+
+---
+
+## | Section: Teacher Forum / Chatboard (optional)|
+
+---
+
+## | Navbar |
+
+## | Hero: “Find a Mentor in STEM” |
+
+| Mentor Profiles (Grid) |
+| [Dr. Mpho – Space Engineer] [Nthabi – Data Scientist] |
+| Each card: “Request Mentorship” button |
+
+---
+
+| Section: Mentorship Journey Tracker (for signed-in users) |
+| - “You’ve been matched with Dr. Mpho” |
+| - “Session 1: Goal Setting – Completed” |
+
+---
