@@ -79,3 +79,18 @@
 | - “Session 1: Goal Setting – Completed” |
 
 ---
+
+---
+
+## | Navbar |
+
+## | Hero: “Upcoming Events & Learning Trips” |
+
+| Event List (Dynamic or Static) |
+| [SANSA Open Day – Hermanus – 15 Dec] |
+| [Holiday Space Bootcamp – Gauteng – 10 Jan] |
+| [Online Robotics Camp – Nationwide – 20 Jan] |
+
+---
+
+## | Button: “Apply” → Opens form (Name, Grade, Region) |
