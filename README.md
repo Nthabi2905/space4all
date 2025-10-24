@@ -108,3 +108,18 @@
 | - Contact Information |
 
 ---
+
+---
+
+## | Navbar |
+
+## | Tabs: [Learner Login] [Teacher Login] [Mentor Login] |
+
+## | Form: Username + Password (or Google Sign-In) |
+
+| Once logged in: |
+| - Show personalized progress dashboard |
+| - Badges earned |
+| - Mentorship updates |
+
+---
