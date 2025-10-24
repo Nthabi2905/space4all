@@ -94,3 +94,17 @@
 ---
 
 ## | Button: “Apply” → Opens form (Name, Grade, Region) |
+
+---
+
+## | Navbar |
+
+| Title: “Join the Mission” |
+| Text: Space4All operates as a non-profit initiative |
+| Sections: |
+| - Corporate Partnerships (CSI) |
+| - Impact Metrics |
+| - How to Get Involved |
+| - Contact Information |
+
+---
