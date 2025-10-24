@@ -19,3 +19,24 @@
 ## | Section: Testimonials / Partners (logos) |
 
 ## | Footer: Contact | Socials | SANSA | Privacy |
+
+---
+
+## | Navbar (same as above) |
+
+| Title: “Your Missions” |
+| Filter: [Grade 4–6] [Grade 7–9] [Grade 10–12]|
+
+---
+
+| Mission Cards (Grid layout): |
+| [🛰️ Planet Earth & Beyond] [🔥 Energy & Change] |
+| [💻 Coding a Rover] [🌦️ Weather & Climate] |
+
+---
+
+| Each card: |
+| - “Start Mission” button |
+| - Progress bar |
+
+---
