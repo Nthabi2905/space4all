@@ -96,10 +96,10 @@ For the **hackathon**, our **Minimum Viable Product (MVP)** includes:
 
 ## 🧑‍🚀 Team
 
-| Name                  | Role               | Responsibilities                                     |
-| --------------------- | ------------------ | ---------------------------------------------------- |
-| **Nthabiseng Moloi**  | Frontend Developer | Builds responsive UI, connects to data layer         |
-| **[Teammate’s Name]** | Data Analyst       | Handles data collection, analysis, and visualization |
+| Name                        | Role               | Responsibilities                                     |
+| --------------------------- | ------------------ | ---------------------------------------------------- |
+| **Nthabiseng Moloi**        | Frontend Developer | Builds responsive UI, connects to data layer         |
+| **Zamile Nelson Njikelani** | Data Analyst       | Handles data collection, analysis, and visualization |
 
 ---
 
@@ -109,3 +109,5 @@ For the **hackathon**, our **Minimum Viable Product (MVP)** includes:
    ```bash
    git clone https://github.com/your-username/space-education-hub.git
    ```
+
+---
