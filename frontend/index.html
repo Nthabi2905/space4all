@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SpaceEd — CAPS Mapper</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* small CSS if you want quick style */
+      body {
+        font-family: system-ui, Segoe UI, Arial;
+        padding: 1.5rem;
+        max-width: 900px;
+        margin: auto;
+      }
+      textarea {
+        width: 100%;
+        height: 140px;
+        padding: 0.6rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      button {
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        border: 0;
+        background: #0b6efd;
+        color: #fff;
+      }
+      pre {
+        background: #f7f7f7;
+        padding: 1rem;
+        border-radius: 6px;
+        white-space: pre-wrap;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>SpaceEd — CAPS Mapper (Demo)</h1></header>
+
+    <section>
+      <p>
+        Paste topics (one per line) and click <strong>Map to CAPS</strong>. This
+        demo stores the result in the database.
+      </p>
+      <textarea
+        id="topics"
+        placeholder="phases of the moon&#10;rotation of the Earth"
+      ></textarea>
+      <div style="margin-top: 0.6rem">
+        <button id="mapBtn">Map to CAPS</button>
+      </div>
+    </section>
+
+    <section style="margin-top: 1.25rem">
+      <h2>Mapping Result</h2>
+      <pre id="result">No results yet.</pre>
+    </section>
+
+    <script type="module">
+      const SUPABASE_URL = "https://your-supabase-url.supabase.co"; // from data analyst
+      const SUPABASE_ANON_KEY = "your-anon-key";
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // very simple client-side mapping table (you can expand)
+      const CAPS_DB = [
+        {
+          keywords: ["moon", "phases"],
+          caps: "Grade 6 - Earth & Beyond: Moon phases",
+          resources: [{ type: "video", title: "Moon phases", url: "#" }],
+        },
+        {
+          keywords: ["rotation", "revolution", "day", "year"],
+          caps: "Grade 7 - Earth in the Solar System",
+          resources: [
+            { type: "worksheet", title: "Rotation activity", url: "#" },
+          ],
+        },
+      ];
+
+      document.getElementById("mapBtn").onclick = async () => {
+        const raw = document.getElementById("topics").value.trim();
+        if (!raw) return alert("Please paste at least one topic.");
+        const topics = raw
+          .split("\n")
+          .map((t) => t.trim())
+          .filter(Boolean);
+        const mappings = topics.map((topic) => {
+          const lower = topic.toLowerCase();
+          const found = CAPS_DB.find((e) =>
+            e.keywords.some((k) => lower.includes(k))
+          );
+          if (found)
+            return {
+              topic,
+              caps_topic: found.caps,
+              resources: found.resources,
+            };
+          return {
+            topic,
+            caps_topic: "No direct CAPS match found",
+            resources: [],
+          };
+        });
+
+        // show result on page
+        document.getElementById("result").textContent = JSON.stringify(
+          mappings,
+          null,
+          2
+        );
+
+        // store mappings in Supabase caps_mappings table
+        const { data, error } = await supabase
+          .from("caps_mappings")
+          .insert([{ user_id: null, original_payload: { topics }, mappings }]);
+        if (error) console.error(error);
+        else console.log("Stored mapping", data);
+      };
+    </script>
+  </body>
+</html>

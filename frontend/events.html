@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SpaceEd — Events</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>SpaceEd — Events</h1>
+    <div id="eventCard">
+      <h2 id="title">Loading...</h2>
+      <p id="date"></p>
+      <p>Seats: <span id="seats">—</span></p>
+      <button id="signupBtn">Sign up</button>
+    </div>
+
+    <script type="module">
+      const SUPABASE_URL = "https://your-supabase-url.supabase.co";
+      const SUPABASE_ANON_KEY = "your-anon-key";
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // fetch the first event (demo)
+      async function loadEvent() {
+        const { data } = await supabase
+          .from("events")
+          .select("*")
+          .limit(1)
+          .single();
+        if (!data)
+          return (document.getElementById("title").textContent =
+            "No events yet");
+        window.EVENT_ID = data.id;
+        document.getElementById("title").textContent = data.title;
+        document.getElementById("date").textContent = new Date(
+          data.date
+        ).toLocaleString();
+        document.getElementById(
+          "seats"
+        ).textContent = `${data.seats_taken} / ${data.capacity}`;
+      }
+      loadEvent();
+
+      // subscribe to updates for this event
+      supabase
+        .from("events")
+        .on("UPDATE", (payload) => {
+          const e = payload.new;
+          if (window.EVENT_ID === e.id) {
+            document.getElementById(
+              "seats"
+            ).textContent = `${e.seats_taken} / ${e.capacity}`;
+          }
+        })
+        .subscribe();
+
+      // sign up: simple approach — try to update row with check (serverless recommended)
+      document.getElementById("signupBtn").onclick = async () => {
+        if (!window.EVENT_ID) return alert("Event not loaded");
+        // call a Supabase RPC or your serverless function ideally. Quick approach:
+        // simple update that increments seats_taken if seats remain — this won't be atomic here without a server RPC
+        // Ask your data analyst to create a safer RPC called 'signup_for_event' that does:
+        // UPDATE events SET seats_taken = seats_taken+1 WHERE id=$1 AND seats_taken < capacity RETURNING *
+        const res = await fetch("/api/signup-event", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ eventId: window.EVENT_ID, userId: null }),
+        });
+        const json = await res.json();
+        if (json.error) alert("Signup failed: " + json.error);
+        else alert(json.message || "Signed up (check seats)");
+      };
+    </script>
+  </body>
+</html>
