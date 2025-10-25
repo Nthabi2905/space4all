@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Virtual Space Workshop",
+    "date": "2025-11-15",
+    "location": "Online",
+    "description": "Learn about the planets and build your first robot."
+  },
+  {
+    "title": "Teacher STEM Crash Course",
+    "date": "2025-12-01",
+    "location": "Pretoria",
+    "description": "CAPS-aligned STEM training for primary school educators."
+  },
+  {
+    "title": "National Space Olympiad",
+    "date": "2026-01-20",
+    "location": "Cape Town",
+    "description": "Competition for learners to showcase robotics and coding projects."
+  }
+]
